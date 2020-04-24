@@ -1,4 +1,5 @@
 const tmi = require("tmi.js");
+const playSound = require("./src/soundsHandler.js");
 
 // Define configuration options
 const opts = {
@@ -25,8 +26,10 @@ const onMessageHandler = (target, context, msg, self) => {
     const num = rollDice();
     client.say(target, `You rolled a ${num}`);
     console.log(`* Executed ${commandName} command`);
-  } else {
-    console.log(`* Unknown command ${commandName}`);
+  }
+
+  if (commandName.includes("!playsound")) {
+    playSound(msg.slice(11));
   }
 };
 
